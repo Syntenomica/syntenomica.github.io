@@ -4,359 +4,45 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Syntenomica Privacy Policy</title>
-<meta name="description" content="How the Syntenomica Android app handles your data: research files stay on your device, purchases go through Google Play, and nothing is shared unless you send it.">
+<meta name="description" content="Privacy policy for Syntenomica 0.8.6: microscopy files are processed on your device, with sharing only when you choose it.">
 <link rel="canonical" href="https://syntenomica.github.io/privacy/">
 <style>
-  /* Layout: one reading column (about 68 characters), an at-a-glance table of where data goes, then numbered sections people can cite. */
-  :root {
-    --bg: #f6f8f7;
-    --panel: #eaf0ee;
-    --ink: #14201c;
-    --muted: #51625d;
-    --line: #d2ddd9;
-    --accent: #1d7563;
-    --accent-soft: #d9eee7;
-    --font-head: "Avenir Next", "Segoe UI Variable Display", "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
-    --font-body: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, "Noto Serif", serif;
-    --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", Menlo, Consolas, monospace;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #0b1011;
-      --panel: #131b1c;
-      --ink: #e3ebe8;
-      --muted: #9bada7;
-      --line: #263231;
-      --accent: #88cbbb;
-      --accent-soft: #17312b;
-      color-scheme: dark;
-    }
-  }
-  :root[data-theme="dark"] {
-    --bg: #0b1011;
-    --panel: #131b1c;
-    --ink: #e3ebe8;
-    --muted: #9bada7;
-    --line: #263231;
-    --accent: #88cbbb;
-    --accent-soft: #17312b;
-    color-scheme: dark;
-  }
-
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: var(--font-body);
-    font-size: 17px;
-    line-height: 1.6;
-    -webkit-text-size-adjust: 100%;
-  }
-  .page {
-    max-width: 44rem;
-    margin: 0 auto;
-    padding-left: max(16px, env(safe-area-inset-left, 0px));
-    padding-right: max(16px, env(safe-area-inset-right, 0px));
-    padding-block: 40px 56px;
-    display: grid;
-    gap: 40px;
-  }
-
-  a { color: var(--accent); text-underline-offset: 2px; }
-  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
-  code, .mono { font-family: var(--font-mono); font-size: 0.86em; }
-
-  /* Header */
-  header { display: grid; gap: 14px; }
-  .brand { display: flex; align-items: center; gap: 12px; color: var(--accent); }
-  .brand svg { flex: none; }
-  .eyebrow {
-    font-family: var(--font-mono);
-    font-size: 13px;
-    letter-spacing: 0.04em;
-    color: var(--muted);
-  }
-  h1, h2, h3 { font-family: var(--font-head); text-wrap: balance; color: var(--ink); }
-  h1 { font-size: clamp(30px, 6vw, 40px); line-height: 1.1; margin: 0; font-weight: 700; letter-spacing: -0.01em; }
-  .lede { margin: 0; font-size: 19px; color: var(--ink); max-width: 38rem; }
-  .meta {
-    display: flex; flex-wrap: wrap; gap: 6px 20px;
-    margin: 0; padding: 0; list-style: none;
-    font-family: var(--font-mono); font-size: 13px; color: var(--muted);
-  }
-  .meta b { font-weight: 600; color: var(--ink); }
-
-  /* At a glance */
-  .glance { display: grid; gap: 12px; }
-  .label {
-    font-family: var(--font-head);
-    font-size: 12px; font-weight: 600;
-    letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--muted); margin: 0;
-  }
-  .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
-  table { width: 100%; border-collapse: collapse; font-size: 15.5px; line-height: 1.45; }
-  th, td { text-align: left; vertical-align: top; padding: 12px 14px; border-bottom: 1px solid var(--line); }
-  tr:last-child th, tr:last-child td { border-bottom: 0; }
-  thead th {
-    font-family: var(--font-head); font-size: 12px; font-weight: 600;
-    letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
-    background: var(--panel);
-  }
-  tbody th { font-family: var(--font-head); font-weight: 600; width: 42%; }
-  .chip {
-    display: inline-block; margin-bottom: 4px;
-    font-family: var(--font-head); font-size: 12.5px; font-weight: 600;
-    padding: 2px 9px; border-radius: 999px;
-    border: 1px solid var(--line); color: var(--ink); background: var(--bg);
-  }
-  .chip.local { background: var(--accent-soft); border-color: transparent; color: var(--ink); }
-  td p { margin: 0; color: var(--muted); }
-
-  /* Contents */
-  nav ol {
-    margin: 0; padding: 0; list-style: none;
-    columns: 2 15rem; column-gap: 28px;
-    font-family: var(--font-head); font-size: 15px;
-  }
-  nav li { break-inside: avoid; padding: 3px 0; display: flex; gap: 10px; }
-  nav li span { font-family: var(--font-mono); font-size: 13px; color: var(--muted); min-width: 1.6em; padding-top: 1px; }
-  nav a { text-decoration: none; }
-  nav a:hover { text-decoration: underline; }
-
-  /* Sections */
-  main { display: grid; gap: 36px; }
-  section { display: grid; gap: 10px; scroll-margin-top: 16px; }
-  h2 { font-size: 22px; line-height: 1.25; margin: 0; font-weight: 600; display: flex; gap: 12px; align-items: baseline; }
-  h2 .num { font-family: var(--font-mono); font-size: 14px; font-weight: 500; color: var(--accent); min-width: 1.6em; }
-  section p, section ul { margin: 0; }
-  section ul { padding-left: 1.2em; display: grid; gap: 6px; }
-  section li::marker { color: var(--accent); }
-  .note { color: var(--muted); font-size: 15.5px; }
-
-  footer {
-    border-top: 1px solid var(--line);
-    padding-top: 18px;
-    display: flex; flex-wrap: wrap; gap: 6px 24px; justify-content: space-between;
-    font-family: var(--font-mono); font-size: 13px; color: var(--muted);
-  }
-
-  .chip { white-space: nowrap; }
-  @media (max-width: 480px) {
-    body { font-size: 16px; }
-    .lede { font-size: 17px; }
-    /* Stack each row: what the data is, then where it goes. */
-    thead { display: none; }
-    tbody tr { display: grid; gap: 6px; padding: 12px; border-bottom: 1px solid var(--line); }
-    tbody tr:last-child { border-bottom: 0; }
-    tbody th, tbody td { display: block; width: auto; padding: 0; border-bottom: 0; }
-  }
-  @media (prefers-reduced-motion: no-preference) {
-    html { scroll-behavior: smooth; }
-  }
+:root{--bg:#f6f8f7;--panel:#eaf0ee;--ink:#14201c;--muted:#51625d;--line:#d2ddd9;--accent:#1d7563;--accent-soft:#d9eee7;--head:"Avenir Next","Segoe UI Variable Display","Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;--body:Charter,"Bitstream Charter",Cambria,Georgia,"Noto Serif",serif;--mono:ui-monospace,"SF Mono","Cascadia Mono",Menlo,Consolas,monospace}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0b1011;--panel:#131b1c;--ink:#e3ebe8;--muted:#9bada7;--line:#263231;--accent:#88cbbb;--accent-soft:#17312b;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#0b1011;--panel:#131b1c;--ink:#e3ebe8;--muted:#9bada7;--line:#263231;--accent:#88cbbb;--accent-soft:#17312b;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.62;-webkit-text-size-adjust:100%}.page{max-width:46rem;margin:0 auto;padding:40px max(18px,env(safe-area-inset-left)) 56px max(18px,env(safe-area-inset-right));display:grid;gap:34px}a{color:var(--accent);text-underline-offset:3px}a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}header{display:grid;gap:15px}.brand{display:flex;align-items:center;gap:12px;color:var(--accent);font:13px var(--mono);letter-spacing:.035em}.brand svg{flex:none}h1,h2,h3{font-family:var(--head);text-wrap:balance;color:var(--ink)}h1{font-size:clamp(30px,6vw,42px);line-height:1.1;margin:0;font-weight:700;letter-spacing:-.02em}.lede{margin:0;font-size:19px;max-width:40rem}.meta{display:flex;flex-wrap:wrap;gap:7px 18px;margin:0;padding:0;list-style:none;font:13px var(--mono);color:var(--muted)}.meta b{color:var(--ink);font-weight:600}.glance{display:grid;gap:12px}.label{font:600 12px var(--head);letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0}.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.45}th,td{text-align:left;vertical-align:top;padding:12px 14px;border-bottom:1px solid var(--line)}tr:last-child th,tr:last-child td{border-bottom:0}thead th{font:600 12px var(--head);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--panel)}tbody th{font:600 15px var(--head);width:42%}.chip{display:inline-block;margin-bottom:4px;padding:2px 9px;border:1px solid var(--line);border-radius:999px;font:600 12px var(--head);white-space:nowrap}.chip.local{background:var(--accent-soft);border-color:transparent}td p{margin:0;color:var(--muted)}nav ol{margin:0;padding:0;list-style:none;columns:2 15rem;column-gap:26px;font:15px var(--head)}nav li{break-inside:avoid;padding:3px 0;display:flex;gap:10px}nav li span{min-width:1.6em;padding-top:1px;color:var(--muted);font:13px var(--mono)}nav a{text-decoration:none}nav a:hover{text-decoration:underline}main{display:grid;gap:31px}section{display:grid;gap:9px;scroll-margin-top:16px}h2{display:flex;gap:12px;align-items:baseline;font:600 22px/1.25 var(--head);margin:0}h2 .num{min-width:1.6em;color:var(--accent);font:500 14px var(--mono)}section p,section ul{margin:0}section ul{padding-left:1.2em;display:grid;gap:6px}section li::marker{color:var(--accent)}.note{color:var(--muted);font-size:15px}footer{border-top:1px solid var(--line);padding-top:18px;display:flex;flex-wrap:wrap;gap:6px 24px;justify-content:space-between;font:13px var(--mono);color:var(--muted)}
+@media(max-width:480px){body{font-size:16px}.lede{font-size:17px}thead{display:none}tbody tr{display:grid;gap:6px;padding:12px;border-bottom:1px solid var(--line)}tbody tr:last-child{border-bottom:0}tbody th,tbody td{display:block;width:auto;padding:0;border:0}}
+@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
 </style>
 </head>
 <body>
 <div class="page">
-  <header>
-    <div class="brand">
-      <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
-        <circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="1.5"/>
-        <circle cx="20" cy="20" r="11" fill="none" stroke="currentColor" stroke-width="1" opacity="0.55"/>
-        <path d="M20 6v6M20 28v6M6 20h6M28 20h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-        <circle cx="20" cy="20" r="1.6" fill="currentColor"/>
-      </svg>
-      <span class="eyebrow">Syntenomica for Android · com.syntenomica.trace</span>
-    </div>
-    <h1>Syntenomica Privacy Policy</h1>
-    <p class="lede">Syntenomica is an Android app for microscopy research. It analyses your images and videos on your phone. This policy explains what the app does with your data, what leaves your device and when, and how to contact us.</p>
-    <ul class="meta">
-      <li><b>Last updated</b> <time datetime="2026-10-20">20 October 2026</time></li>
-      <li><b>Applies to</b> every version on Google Play</li>
-      <li><b>Contact</b> syntenomica@gmail.com</li>
-    </ul>
-  </header>
-
-  <section class="glance" aria-labelledby="glance-title">
-    <h2 class="label" id="glance-title">At a glance</h2>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr><th scope="col">Your data</th><th scope="col">Where it goes</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">Images, videos, projects, notes and results</th>
-            <td><span class="chip local">Stays on your device</span><p>The app never uploads them.</p></td>
-          </tr>
-          <tr>
-            <th scope="row">Image and video analysis, organism identification</th>
-            <td><span class="chip local">Runs on your device</span><p>The identification model is part of the app.</p></td>
-          </tr>
-          <tr>
-            <th scope="row">Purchases</th>
-            <td><span class="chip">Google Play</span><p>We never see your payment details. Google’s billing component may also send Google its own technical logs.</p></td>
-          </tr>
-          <tr>
-            <th scope="row">Exports, shared files and contributions</th>
-            <td><span class="chip">Only if you send them</span><p>You choose the app and the recipient.</p></td>
-          </tr>
-          <tr>
-            <th scope="row">Account, ads, tracking</th>
-            <td><span class="chip">None</span><p>Syntenomica has none of these and runs no analytics of its own.</p></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <nav aria-labelledby="contents-title">
-    <h2 class="label" id="contents-title">Contents</h2>
-    <ol>
-      <li><span>1</span><a href="#who-we-are">Who we are</a></li>
-      <li><span>2</span><a href="#on-your-device">Data stored on your device</a></li>
-      <li><span>3</span><a href="#processing">How the app processes data</a></li>
-      <li><span>4</span><a href="#purchases">Google Play purchases</a></li>
-      <li><span>5</span><a href="#exports">Exporting and sharing</a></li>
-      <li><span>6</span><a href="#contributions">Contributing images</a></li>
-      <li><span>7</span><a href="#email">Contacting us by email</a></li>
-      <li><span>8</span><a href="#components">Components from other companies</a></li>
-      <li><span>9</span><a href="#not-done">What we do not do</a></li>
-      <li><span>10</span><a href="#security">Security</a></li>
-      <li><span>11</span><a href="#retention">Keeping and deleting data</a></li>
-      <li><span>12</span><a href="#rights">Your rights</a></li>
-      <li><span>13</span><a href="#children">Children</a></li>
-      <li><span>14</span><a href="#changes">Changes to this policy</a></li>
-    </ol>
-  </nav>
-
-  <main>
-    <section id="who-we-are">
-      <h2><span class="num">1</span>Who we are</h2>
-      <p>Syntenomica is developed by Dániel Sági, an independent developer based in Hungary. In this policy, “we” and “us” mean the developer.</p>
-      <p>For the personal data we handle ourselves, described in sections 4, 6 and 7, we are the data controller under the EU General Data Protection Regulation (GDPR). You can reach us at <a href="mailto:syntenomica@gmail.com">syntenomica@gmail.com</a>.</p>
-    </section>
-
-    <section id="on-your-device">
-      <h2><span class="num">2</span>Data stored on your device</h2>
-      <p>Syntenomica keeps the following in its private app storage on your phone:</p>
-      <ul>
-        <li>private copies of the images and videos you import;</li>
-        <li>research projects, instrument and objective profiles, calibration settings, sample details, notes and other information you enter;</li>
-        <li>results the app computes, such as previews, focus composites, relief (depth) maps, measurements and identification results;</li>
-        <li>SHA-256 fingerprints of imported and derived files, used to check that a file has not changed since import;</li>
-        <li>your daily import count and a saved copy of your Premium status.</li>
-      </ul>
-      <p>None of this is sent to us or to anyone else. Only you decide whether to export or share any of it (sections 5 and 6).</p>
-    </section>
-
-    <section id="processing">
-      <h2><span class="num">3</span>How the app processes data</h2>
-      <p>All analysis runs on your phone. This includes frame extraction, focus stacking, relief computation and the experimental organism identification, which uses a model bundled with the app.</p>
-      <p>Besides an internal permission that Android adds for the app’s own components, Syntenomica uses two permissions:</p>
-      <ul>
-        <li><b>Internet access</b>, used only to communicate with Google Play for purchases;</li>
-        <li><b>Google Play Billing</b>, used to show offers and complete purchases.</li>
-      </ul>
-      <p>The app has no access to your camera, microphone, location or contacts. You choose files with Android’s system file picker, and the app can open only the files you pick.</p>
-      <p>Imported originals are kept unchanged. If a file already contains embedded metadata, such as a location recorded by a camera, that metadata stays in the file. Syntenomica does not read or use location data, but an original that you export or share carries its metadata with it.</p>
-    </section>
-
-    <section id="purchases">
-      <h2><span class="num">4</span>Google Play purchases</h2>
-      <p>Premium is sold through Google Play. Google Play handles offers, payment and refunds, and processes your payment information under the <a href="https://policies.google.com/privacy" rel="noopener">Google Privacy Policy</a>. Syntenomica never receives your card or bank details.</p>
-      <p>To find out which purchases are active, the app asks Google Play on your device and saves the result locally. It confirms new purchases to Google Play, as Google requires. We do not run a purchase server of our own.</p>
-      <p>Separately from the app, Google Play gives us transaction records in the Play Console, which we need for accounting, tax and refunds, for example the order number, product, price, date and country. These records do not come from Syntenomica on your device. We use them to meet our legal obligations (GDPR Art. 6(1)(c)) and keep them for as long as accounting and tax law requires.</p>
-    </section>
-
-    <section id="exports">
-      <h2><span class="num">5</span>Exporting and sharing</h2>
-      <p>Nothing leaves the app unless you start it. You can:</p>
-      <ul>
-        <li>save a Video Trace JSON record, a result package or relief data to a location you choose with Android’s file picker;</li>
-        <li>share a discovery card, a relief view or a 3D video through Android’s share menu.</li>
-      </ul>
-      <p>Exports can include images, measurements and the project or sample information you entered. The app, service or person you send them to handles them under its own terms. Temporary copies made for sharing are kept in the app’s private cache and cleared over time.</p>
-    </section>
-
-    <section id="contributions">
-      <h2><span class="num">6</span>Contributing images</h2>
-      <p>In the identification view you can bundle an image with the label you believe is correct and send it to us through Android’s share menu, for example by email. Nothing is sent automatically, and you choose the app and the recipient. A contribution package contains:</p>
-      <ul>
-        <li>the image file, unchanged, including any metadata it already contains;</li>
-        <li>the label you chose and the identification results the app showed;</li>
-        <li>technical details such as the file name, image size, SHA-256 fingerprint, the app and model version, and when the package was made.</li>
-      </ul>
-      <p>You license the image and label under <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">Creative Commons Attribution 4.0 (CC BY 4.0)</a>, as the app states before you send it. We use contributions to train and test Syntenomica’s identification model, and they remain part of its training data.</p>
-      <p>Specimen images are usually not personal data, but a file can carry personal metadata, such as a location recorded by a camera. Check the file before you send it if that matters to you.</p>
-      <p>If you send a contribution by email, we also receive your email address; see section 7.</p>
-    </section>
-
-    <section id="email">
-      <h2><span class="num">7</span>Contacting us by email</h2>
-      <p>When you email us, we receive your email address, your name if your email app includes it, and what you write or attach. We use this only to answer you and to handle your request, such as a contribution, a bug report or a privacy request. Our legal basis is our legitimate interest in responding to you (GDPR Art. 6(1)(f)).</p>
-      <p>Correspondence stays in our mailbox, which is a Gmail account, so Google also stores these messages under its own terms. Under the GDPR you can ask us to delete them (section 12).</p>
-    </section>
-
-    <section id="components">
-      <h2><span class="num">8</span>Components from other companies</h2>
-      <p>Syntenomica includes the following software components:</p>
-      <ul>
-        <li><b>Google Play Billing Library</b> (Google) connects the app with Google Play for purchases and exchanges purchase information with Google Play to do so. Google’s release notes say the library also logs whether billing calls succeed and any connection problems, and that this information is used to improve the library and to help with errors. We do not receive these logs. If the library sends them off your device, they go to Google, which handles them under the Google Privacy Policy.</li>
-        <li><b>ONNX Runtime</b> (Microsoft) runs the identification model on your device. It includes an optional usage-reporting feature. Syntenomica turns this feature off, so the app sends no usage or diagnostic data to Microsoft.</li>
-        <li><b>FFmpegKit</b> (open source) decodes, on your device, video formats that Android cannot open by itself.</li>
-      </ul>
-    </section>
-
-    <section id="not-done">
-      <h2><span class="num">9</span>What we do not do</h2>
-      <p>Syntenomica has no user accounts, advertising or tracking, it does not use the Android advertising ID, and we run no analytics of our own. Google’s billing component may send its own technical logs to Google (section 8). We do not sell or rent personal data, and we do not share it with anyone for advertising.</p>
-    </section>
-
-    <section id="security">
-      <h2><span class="num">10</span>Security</h2>
-      <ul>
-        <li>Your data stays in Syntenomica’s private app storage, which Android keeps separate from other apps.</li>
-        <li>Android cloud backup and device-to-device transfer are turned off for Syntenomica’s data, so the app’s data is not copied to a backup service.</li>
-        <li>Purchase communication runs through Google Play’s own encrypted connection.</li>
-        <li>When you share a file, Android gives the receiving app access to that file only.</li>
-      </ul>
-      <p class="note">Keeping your phone locked and up to date also protects the research data stored on it.</p>
-    </section>
-
-    <section id="retention">
-      <h2><span class="num">11</span>Keeping and deleting data</h2>
-      <ul>
-        <li><b>Data on your device</b> stays there until you delete it. Deleting a focus sweep removes its previews and composite. To remove everything, clear Syntenomica’s storage in Android settings or uninstall the app. Neither can be undone, so keep separate copies of your original research files.</li>
-        <li><b>Exported or shared copies</b> stay wherever you saved or sent them, and you delete them there.</li>
-        <li><b>Contributions</b> remain part of the training data for the identification model.</li>
-        <li><b>Emails</b> stay in our mailbox. Under the GDPR you can ask us to delete them (section 12).</li>
-        <li><b>Transaction records</b> are kept as long as accounting and tax law requires.</li>
-      </ul>
-    </section>
-
-    <section id="rights">
-      <h2><span class="num">12</span>Your rights</h2>
-      <p>Under the GDPR you can ask us for access to the personal data we hold about you, and for its correction, deletion, restriction or transfer. You can also object to its processing. Email <a href="mailto:syntenomica@gmail.com">syntenomica@gmail.com</a>.</p>
-      <p>Your research data is stored only on your device, so we cannot see or delete it for you. You can delete it yourself as described in section 11.</p>
-      <p>You can also lodge a complaint with the Hungarian data protection authority, the Nemzeti Adatvédelmi és Információszabadság Hatóság (<a href="https://naih.hu" rel="noopener">NAIH</a>), or with the data protection authority in your own country.</p>
-    </section>
-
-    <section id="children">
-      <h2><span class="num">13</span>Children</h2>
-      <p>Syntenomica is a research tool and is not directed at children. We do not knowingly receive personal data from children. If you believe a child has sent us personal data, contact us.</p>
-    </section>
-
-    <section id="changes">
-      <h2><span class="num">14</span>Changes to this policy</h2>
-      <p>Changes to this policy are published on this page, with a new date at the top.</p>
-    </section>
-  </main>
-
-  <footer>
-    <span>Syntenomica Privacy Policy · 20 October 2026</span>
-    <span>syntenomica@gmail.com</span>
-  </footer>
+<header>
+  <div class="brand"><svg width="38" height="38" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="20" cy="20" r="11" fill="none" stroke="currentColor" stroke-width="1" opacity=".55"/><path d="M20 6v6M20 28v6M6 20h6M28 20h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="20" cy="20" r="1.6" fill="currentColor"/></svg><span>Syntenomica for Android · com.syntenomica.trace</span></div>
+  <h1>Syntenomica Privacy Policy</h1>
+  <p class="lede">Syntenomica is a microscopy research app. It processes selected images and videos on your phone. This policy describes the current free version, what stays on your device, and what happens when you choose to share a file.</p>
+  <ul class="meta"><li><b>Last updated</b> <time datetime="2026-10-20">20 October 2026</time></li><li><b>Applies to</b> Syntenomica 0.8.6 (25)</li><li><b>Contact</b> <a href="mailto:syntenomica@gmail.com">syntenomica@gmail.com</a></li></ul>
+</header>
+<section class="glance" aria-labelledby="glance-title"><h2 class="label" id="glance-title">At a glance</h2><div class="table-wrap"><table><thead><tr><th scope="col">Your data</th><th scope="col">What happens to it</th></tr></thead><tbody>
+<tr><th scope="row">Images, videos, projects and results</th><td><span class="chip local">Stays on your device</span><p>Analysis and the bundled identification model run locally.</p></td></tr>
+<tr><th scope="row">Contribution package</th><td><span class="chip">Only when you share it</span><p>You choose the receiving app and recipient; the package includes the image, your label and technical details.</p></td></tr>
+<tr><th scope="row">Account, ads and analytics</th><td><span class="chip">Not used</span><p>The app has no user account, advertising or developer-operated analytics.</p></td></tr>
+<tr><th scope="row">Purchases</th><td><span class="chip">Disabled in this version</span><p>This free version does not start a Google Play Billing connection or query products or purchases.</p></td></tr>
+</tbody></table></div></section>
+<nav aria-labelledby="contents-title"><h2 class="label" id="contents-title">Contents</h2><ol><li><span>1</span><a href="#who">Who we are</a></li><li><span>2</span><a href="#local">Data on your device</a></li><li><span>3</span><a href="#processing">Processing and permissions</a></li><li><span>4</span><a href="#sharing">Exporting and sharing</a></li><li><span>5</span><a href="#contributions">Image contributions</a></li><li><span>6</span><a href="#email">Email and support</a></li><li><span>7</span><a href="#components">Third-party components</a></li><li><span>8</span><a href="#retention">Retention and deletion</a></li><li><span>9</span><a href="#rights">Your rights</a></li><li><span>10</span><a href="#children">Children and changes</a></li></ol></nav>
+<main>
+<section id="who"><h2><span class="num">1</span>Who we are</h2><p>Syntenomica is developed by Dániel Sági, an independent developer based in Hungary. For personal data that we receive directly, such as an email or a contribution you choose to send, the developer is the data controller. Contact: <a href="mailto:syntenomica@gmail.com">syntenomica@gmail.com</a>.</p></section>
+<section id="local"><h2><span class="num">2</span>Data on your device</h2><p>The app stores private copies of the microscope images and videos you select, projects, sample information, instrument and objective profiles, notes, calibration settings, file fingerprints, previews, and computed results in its private storage on your device. These may include focus composites, relief maps, measurements and identification results. The app does not automatically upload these files to a developer server.</p><p>Automatic Android backup and device-to-device transfer of the app's private data are disabled. Original recordings remain in the location from which you selected them.</p></section>
+<section id="processing"><h2><span class="num">3</span>Processing and permissions</h2><p>Image and video processing, including focus stacking, relief computation and the experimental organism identification model, runs on your device. The model is bundled with the app.</p><p>You select files through Android's system file picker. The app does not request camera, microphone, contacts or location access. The current free version has Premium and daily import limits turned off. Although the Google Play Billing library is included in the app package, this version does not call its connection, product-query or purchase-query APIs during normal use. Paid features are not available in this release.</p></section>
+<section id="sharing"><h2><span class="num">4</span>Exporting and sharing</h2><p>You start an export or share action and choose where it goes using Android's file picker or share sheet. Depending on the action, exported files can contain images or videos, project and sample information, calibration settings, measurements and processing metadata. The receiving app, service or person handles the copy under its own terms. Uninstalling Syntenomica does not delete copies you have exported or shared.</p><p>Temporary files created for sharing are kept in the app's private cache and are cleared by the app or Android over time.</p></section>
+<section id="contributions"><h2><span class="num">5</span>Image contributions</h2><p>The optional identification contribution feature prepares a ZIP containing the image you selected, the label you provide, the model's displayed guesses, and technical details such as the file name, dimensions, SHA-256 fingerprint, app version, model version and package creation time. The app then opens Android's share sheet. Nothing is sent automatically: you choose the receiving app and the recipient.</p><p>If you choose to send the package to the developer, we receive the image and included information, and may use the contribution to develop or evaluate the identification model. Before sharing, the app tells you that the image and label are offered under the Creative Commons Attribution 4.0 (CC BY 4.0) licence. Images may include metadata already present in the original file; review the file before sharing if that matters to you.</p></section>
+<section id="email"><h2><span class="num">6</span>Email and support</h2><p>If you email us, we receive your email address, any name shown by your email service, and the message and attachments you choose to send. We use them to respond to your request. Email is handled by Google's Gmail service under Google's terms. Avoid sending personal or sensitive research information unless it is needed for your request.</p></section>
+<section id="components"><h2><span class="num">7</span>Third-party components</h2><p>The app includes Google Play Billing, but the current free version does not initiate a billing connection or query products or purchases. Google Play Billing's release notes describe technical logging of billing API outcomes and service-connection issues. We do not receive those logs. The app's current version does not invoke the billing APIs that would produce such activity.</p><p>The app uses ONNX Runtime to run the bundled identification model locally; its optional telemetry initializer is removed from the app package. FFmpegKit is used for local video decoding. Syntenomica does not use its own analytics or advertising SDK.</p></section>
+<section id="retention"><h2><span class="num">8</span>Retention and deletion</h2><p>Local app data remains on your device until you delete it in the app, clear the app's data in Android settings, or uninstall the app. You must delete original files and exported or shared copies separately from their own locations.</p><p>If you choose to send an image contribution or email, the copy you send is retained in the receiving service or mailbox. A contribution may be used in model development under the CC BY 4.0 licence. Uninstalling the app does not remove information already sent to another person or service.</p></section>
+<section id="rights"><h2><span class="num">9</span>Your rights</h2><p>Where we handle personal data about you, you may contact us to request access, correction, deletion, restriction or portability, or to object to processing, under applicable data-protection law. We cannot access or delete data that exists only in your device storage. You may also complain to the Hungarian National Authority for Data Protection and Freedom of Information (NAIH) or your local supervisory authority.</p></section>
+<section id="children"><h2><span class="num">10</span>Children and changes</h2><p>Syntenomica is intended for adult researchers and enthusiasts and is not directed at children. We update this page if the app's data practices change. If paid features or new network services are added in a future version, this policy and the Google Play Data safety declaration will be updated before that version is released.</p></section>
+</main>
+<footer><span>Syntenomica Privacy Policy · 20 October 2026</span><a href="mailto:syntenomica@gmail.com">syntenomica@gmail.com</a><a href="https://github.com/Syntenomica">github.com</a></footer>
 </div>
 </body>
 </html>
